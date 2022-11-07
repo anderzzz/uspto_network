@@ -26,7 +26,8 @@ uspto_api_access = RESTApiAccessData(
     base_url='https://developer.uspto.gov/ds-api/',
     apis={
         'rejections' : 'oa_rejections/v2',
-        'enriched_citation' : 'enriched_cited_reference_metadata/v2'
+        'enriched citation' : 'enriched_cited_reference_metadata/v2',
+        'office actions text' : 'oa_actions/v1'
     },
     metadata_api_label='fields',
     record_api_label='records',
