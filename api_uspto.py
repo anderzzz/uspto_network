@@ -34,6 +34,33 @@ uspto_api_access = RESTApiAccessData(
     headers={'Accept' : 'application/json'}
 )
 
+@dataclass
+class ReturnDataFormat:
+    ret_root : list[str]
+    ret_cited_docs : list[str]
+
+uspto_api_ret = ReturnDataFormat(
+    ret_root=['response', 'docs'],
+    ret_cited_docs=[
+        'id',
+        'applicantCitedExaminerReferenceIndicator',
+        'citationCategoryCode',
+        'citedDocumentIdentifier',
+        'createDateTime',
+        'createUserIdentifier',
+        'examinerCitedReferenceIndicator',
+        'inventorNameText',
+        'obsoleteDocumentIdentifier',
+        'officeActionCategory',
+        'officeActionDate',
+        'patentApplicationNumber',
+        'qualitySummaryText',
+        'groupArtUnitNumber',
+        'techCenter',
+        'workGroup'
+    ]
+)
+
 def do_func(method, url, data=None, **kwargs):
     if method == 'get':
         r = requests.get(url=url, **kwargs)
