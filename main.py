@@ -40,6 +40,7 @@ rc = retrieve_records_for_('enriched citation',
                           verify=False)
 consumer_citation.append(rc)
 consumer_citation._remove_lists()
+consumer_citation.dump_to_('test.csv')
 print (rc)
 
 roa = retrieve_records_for_('office actions text',

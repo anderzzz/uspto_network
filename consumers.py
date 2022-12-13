@@ -21,17 +21,12 @@ class ConsumerUSPTOReturnData(object):
     '''Bla bla
 
     '''
-    def __init__(self, keys2read=None, fp=None):
+    def __init__(self, keys2read=None):
         self.keys2read = keys2read
         if self.keys2read is None:
             self.to_read_ = lambda x: True
         else:
             self.to_read_ = lambda x: x in self.keys2read
-
-        if fp is None:
-            self.fp = None
-        else:
-            self.fp = open(fp, 'w')
 
         self.container = pd.DataFrame()
 
@@ -83,12 +78,9 @@ class ConsumerUSPTOReturnData(object):
     def append(self, payload, read_header=False):
         self.container = pd.concat([self.container, self.process(payload, read_header=read_header)])
 
-    def dump(self, payload, read_header):
-        self.data = self.process(payload, read_header=read_header)
-        self.data.to_csv(path_or_buf=self.fp, mode='a')
+    def dump_to_(self, fp):
+        self.container.to_csv(path_or_buf=fp, mode='a')
+        self.reset()
 
     def reset(self):
         self.container = pd.DataFrame()
-
-    def close(self):
-        self.fp.close()
