@@ -78,8 +78,8 @@ class ConsumerUSPTOReturnData(object):
     def append(self, payload, read_header=False):
         self.container = pd.concat([self.container, self.process(payload, read_header=read_header)])
 
-    def dump_to_(self, fp):
-        self.container.to_csv(path_or_buf=fp, mode='a')
+    def dump_to_(self, fp, mode='a'):
+        self.container.to_csv(path_or_buf=fp, mode=mode)
         self.reset()
 
     def reset(self):
