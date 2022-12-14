@@ -3,7 +3,7 @@
 '''
 from api_uspto import retrieve_metadata_for_, retrieve_records_for_
 from consumers import ConsumerUSPTOReturnData
-from seed_data import patent_seed_data_clothing
+from patent_seed_data import patent_seed_data_clothing
 
 consumer_citation = ConsumerUSPTOReturnData(
     keys2read=[
@@ -30,8 +30,8 @@ consumer_oa = ConsumerUSPTOReturnData(
     ]
 )
 
-#r = retrieve_metadata_for_('enriched citation', verify=False)
-#print (r)
+r = retrieve_metadata_for_('enriched citation', verify=False)
+print (r)
 
 rc = retrieve_records_for_('enriched citation',
                           data={

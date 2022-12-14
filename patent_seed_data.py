@@ -1,18 +1,7 @@
-'''Bla bla
+'''A few seed data for patents
 
 '''
-import json
-from dataclasses import dataclass, field, asdict
-
-@dataclass
-class PatentMeta:
-    application_id : str
-    document_id : str = ''
-    cpci_classifications : list = field(default_factory=lambda : [])
-    title : str = ''
-
-def get_json_str_for_(patent_metas, indent=2):
-    return json.dumps([asdict(p) for p in patent_metas], indent=indent)
+from patent_data import PatentMeta
 
 patent_seed_data_clothing = [
     PatentMeta(
@@ -28,4 +17,3 @@ patent_seed_data_clothing = [
         document_id="US20200237031A1"
     )
 ]
-
