@@ -3,6 +3,7 @@
 '''
 from api_uspto import retrieve_metadata_for_, retrieve_records_for_
 from consumers import ConsumerUSPTOReturnData
+from seed_data import patent_seed_data_clothing
 
 consumer_citation = ConsumerUSPTOReturnData(
     keys2read=[
@@ -29,11 +30,12 @@ consumer_oa = ConsumerUSPTOReturnData(
     ]
 )
 
-r = retrieve_metadata_for_('enriched citation', verify=False)
-print (r)
+#r = retrieve_metadata_for_('enriched citation', verify=False)
+#print (r)
+
 rc = retrieve_records_for_('enriched citation',
                           data={
-                              'criteria' : 'patentApplicationNumber:15731056',
+                              'criteria' : 'patentApplicationNumber:{}'.format(patent_seed_data_clothing[0].application_id),
                               'start' : '0',
                               'rows': '100'
                           },
@@ -45,7 +47,7 @@ print (rc)
 
 roa = retrieve_records_for_('office actions text',
                           data={
-                              'criteria' : 'patentApplicationNumber:15731056',
+                              'criteria' : 'patentApplicationNumber:{}'.format(patent_seed_data_clothing[0].application_id),
                               'start' : '0',
                               'rows' : '100'
                           },
