@@ -2,6 +2,7 @@
 
 '''
 from api_uspto import retrieve_metadata_for_, retrieve_records_for_
+from api_uspto_reader import USPTOAPIReader
 from consumers import ConsumerUSPTOReturnData
 from patent_seed_data import patent_seed_data_clothing
 
@@ -56,3 +57,18 @@ consumer_oa.append(roa)
 consumer_oa._remove_lists()
 print (roa)
 print (consumer_oa.container)
+
+uu = USPTOAPIReader(
+    api_name='enriched citations',
+    consumer_keys=[
+        'id',
+        'citedDocumentIdentifier',
+        'inventorNameText',
+        'officeActionCategory',
+        'officeActionDate',
+        'patentApplicationNumber',
+        'qualitySummaryText'
+    ]
+)
+uu.read_by_patent_application_number_(patent_seed_data_clothing[0].application_id)
+print (uu.container)

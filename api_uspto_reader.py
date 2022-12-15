@@ -73,10 +73,17 @@ class USPTOAPIReader(object):
             keys2read=self.consumer_keys
         )
 
+    @property
+    def container(self):
+        return self.consumer.container
+
+    def __repr__(self):
+        return self.container.__repr__()
+
     def retrieve_api_metadata(self):
         return retrieve_metadata_for_(self.api_name, verify=self.verify_api)
 
-    def retrieve_by_patent_application_number(self, patent_application_number):
+    def retrieve_by_patent_application_number_(self, patent_application_number):
         '''Bla bla
 
         '''
@@ -91,7 +98,7 @@ class USPTOAPIReader(object):
         )
         return rc
 
-    def read_by_patent_application_number(self, patent_application_number):
+    def read_by_patent_application_number_(self, patent_application_number):
         '''Bla bla
 
         '''
