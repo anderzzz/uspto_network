@@ -59,7 +59,7 @@ print (roa)
 print (consumer_oa.container)
 
 uu = USPTOAPIReader(
-    api_name='enriched citations',
+    api_name='enriched citation',
     consumer_keys=[
         'id',
         'citedDocumentIdentifier',

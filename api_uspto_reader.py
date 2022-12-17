@@ -6,6 +6,9 @@ from dataclasses import dataclass
 
 from consumers import ConsumerUSPTOReturnData
 
+class RESTApiAccessDataException(Exception):
+    pass
+
 @dataclass
 class RESTApiAccessData:
     base_url : str
@@ -15,12 +18,18 @@ class RESTApiAccessData:
     headers : dict[str]
 
     def url_records(self, key):
-        url_ = self.base_url + '/' + self.apis[key] + '/' + self.record_api_label
+        try:
+            url_ = self.base_url + '/' + self.apis[key] + '/' + self.record_api_label
+        except KeyError as e:
+            raise RESTApiAccessDataException('Incorrect API key: {}. Available options: {}'.format(e, list(self.apis.keys())))
         url_ = url_[:8] + url_[8:].replace('//','/')
         return url_
 
     def url_metadata(self, key):
-        url_ = self.base_url + '/' + self.apis[key] + '/' + self.metadata_api_label
+        try:
+            url_ = self.base_url + '/' + self.apis[key] + '/' + self.metadata_api_label
+        except KeyError as e:
+            raise RESTApiAccessDataException('Incorrect API key: {}. Available options: {}'.format(e, list(self.apis.keys())))
         url_ = url_[:8] + url_[8:].replace('//','/')
         return url_
 
@@ -103,7 +112,7 @@ class USPTOAPIReader(object):
 
         '''
         self.consumer.append(
-            self.retrieve_by_patent_application_number(patent_application_number)
+            self.retrieve_by_patent_application_number_(patent_application_number)
         )
         self.consumer._remove_lists()
 
